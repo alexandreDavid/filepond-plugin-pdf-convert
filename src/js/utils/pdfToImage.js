@@ -1,13 +1,4 @@
-/*!
- * FilePondPluginPdfConvert 1.0.0
- * Licensed under ISC, https://opensource.org/licenses/ISC/
- * Please visit undefined for details.
- */
-/* eslint-disable */
-
-const isPdf = (file) => /pdf$/.test(file.type);
-
-const pdfToImage = (file, type) => {
+export const pdfToImage = (file, type) => {
   const pages = [];
   const heights = [];
   let width = 0;
@@ -16,8 +7,8 @@ const pdfToImage = (file, type) => {
   const scale = 1.5;
 
   function mergePages() {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
     canvas.width = width;
     canvas.height = height;
     for (let i = 0; i < pages.length; i++) {
@@ -41,8 +32,8 @@ const pdfToImage = (file, type) => {
 
           const viewport = page.getViewport({ scale });
 
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
           const renderContext = { canvasContext: ctx, viewport: viewport };
 
           canvas.height = viewport.height;
@@ -60,7 +51,7 @@ const pdfToImage = (file, type) => {
             getPage();
           } else {
             const canvas = mergePages();
-            const blobBin = atob(canvas.toDataURL(type).split(',')[1]);
+            const blobBin = atob(canvas.toDataURL(type).split(",")[1]);
             const array = [];
             for (let i = 0; i < blobBin.length; i++) {
               array.push(blobBin.charCodeAt(i));
@@ -77,47 +68,3 @@ const pdfToImage = (file, type) => {
     }
   });
 };
-
-const plugin = ({ addFilter, utils }) => {
-  // get quick reference to Type utils
-  const { Type } = utils;
-
-  // called for each file that is loaded
-  // right before it is set to the item state
-  // should return a promise
-  addFilter(
-    'LOAD_FILE',
-    (file, { query }) =>
-      new Promise((resolve, reject) => {
-        if (!isPdf(file)) {
-          resolve(file);
-          return;
-        }
-        pdfToImage(file, query('GET_PDF_CONVERT_TYPE'))
-          .then(function (newFile) {
-            resolve(newFile);
-          })
-          .catch(() => resolve(file));
-      })
-  );
-
-  // expose plugin
-  return {
-    // default options
-    options: {
-      // Set type convertor
-      pdfConvertType: ['image/png', Type.STRING],
-    },
-  };
-};
-
-// fire pluginloaded event if running in browser, this allows registering the plugin when using async script tags
-const isBrowser =
-  typeof window !== 'undefined' && typeof window.document !== 'undefined';
-if (isBrowser) {
-  document.dispatchEvent(
-    new CustomEvent('FilePond:pluginloaded', { detail: plugin })
-  );
-}
-
-export default plugin;

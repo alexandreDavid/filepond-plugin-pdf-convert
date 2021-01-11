@@ -1,6 +1,9 @@
+import { isPdf } from "./utils/isPdf";
+import { pdfToImage } from "./utils/pdfToImage";
+
 const plugin = ({ addFilter, utils }) => {
   // get quick reference to Type utils
-  const { Type, replaceInString, isFile } = utils;
+  const { Type } = utils;
 
   // called for each file that is loaded
   // right before it is set to the item state
@@ -9,8 +12,13 @@ const plugin = ({ addFilter, utils }) => {
     "LOAD_FILE",
     (file, { query }) =>
       new Promise((resolve, reject) => {
-        console.log("PDF convert", isFile(file), file);
-        resolve(file);
+        if (!isPdf(file)) {
+          resolve(file);
+          return;
+        }
+        pdfToImage(file, query('GET_PDF_CONVERT_TYPE')).then(function(newFile) {
+          resolve(newFile);
+        }).catch(() => resolve(file));
       })
   );
 
@@ -19,7 +27,7 @@ const plugin = ({ addFilter, utils }) => {
     // default options
     options: {
       // Set type convertor
-      pdfConvertType: [true, Type.BOOLEAN]
+      pdfConvertType: ['image/png', Type.STRING],
     },
   };
 };

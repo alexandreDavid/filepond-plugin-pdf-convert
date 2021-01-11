@@ -13,6 +13,7 @@
 
     <input type="file"/>
     
+    <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
@@ -33,7 +34,11 @@
 
         // Create the FilePond instance
         const pond = FilePond.create(inputElement, {
-            maxFileSize: '3MB'
+            maxFileSize: '3MB',
+            // Use Doka.js as image editor
+            imageEditEditor: dokaCreate({
+              utils: ['crop', 'filter', 'color']
+            })
         });
     </script>
 </body>
