@@ -24,6 +24,7 @@
     let width = 0;
     let height = 0;
     let currentPage = 1;
+    const marginHeight = 30;
     const scale = 1.5;
 
     function mergePages() {
@@ -77,6 +78,7 @@
 
             if (currentPage < pdf.numPages) {
               currentPage++;
+              height += marginHeight;
               getPage();
             } else {
               const canvas = mergePages();
