@@ -4,16 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FilePond Plugin File Validate Size Demo</title>
+    <title>PDF convert to image plugin for FilePond demo</title>
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet">
+
+    <style>
+      .demo {
+        text-align: center;
+        font-family: Helvetica;
+        margin: 4em auto 0;
+        width: 450px;
+      }
+      a {
+        color: dodgerblue;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
 </head>
 <body>
-
-    <input type="file"/>
+    <div class="demo">
+      <h3>PDF convert to image plugin for FilePond demo</h3>
+      <input type="file" multiple="true" />
+      <a href="https://github.com/alexandreDavid/filepond-plugin-pdf-convert"
+        >Return to forked the source code</a
+      >
+    </div>
     
-    <script src="https://rawgithub.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js" integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
@@ -23,9 +44,7 @@
     <script>
         // Register the plugin with FilePond
         FilePond.registerPlugin(
-          FilePondPluginFileValidateSize,
           FilePondPluginImagePreview,
-          FilePondPluginImageEdit,
           FilePondPluginPdfConvert
         );
 
@@ -33,13 +52,7 @@
         const inputElement = document.querySelector('input[type="file"]');
 
         // Create the FilePond instance
-        const pond = FilePond.create(inputElement, {
-            maxFileSize: '3MB',
-            // Use Doka.js as image editor
-            imageEditEditor: dokaCreate({
-              utils: ['crop', 'filter', 'color']
-            })
-        });
+        const pond = FilePond.create(inputElement);
     </script>
 </body>
 </html>
