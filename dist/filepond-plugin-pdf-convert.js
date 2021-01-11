@@ -18,13 +18,12 @@
 
   const isPdf = (file) => /pdf$/.test(file.type);
 
-  const pdfToImage = (file, type) => {
+  const pdfToImage = (file, type, marginHeight) => {
     const pages = [];
     const heights = [];
     let width = 0;
     let height = 0;
     let currentPage = 1;
-    const marginHeight = 30;
     const scale = 1.5;
 
     function mergePages() {
@@ -123,7 +122,11 @@
             return;
           }
 
-          pdfToImage(file, query('GET_PDF_CONVERT_TYPE'))
+          pdfToImage(
+            file,
+            query('GET_PDF_CONVERT_TYPE'),
+            query('GET_PDF_CONVERT_MARGIN_HEIGHT')
+          )
             .then(function (newFile) {
               resolve(newFile);
             })
@@ -136,6 +139,7 @@
       options: {
         // Set type convertor
         pdfConvertType: ['image/png', Type.STRING],
+        pdfConvertMarginHeight: [30, Type.NUMBER],
       },
     };
   }; // fire pluginloaded event if running in browser, this allows registering the plugin when using async script tags

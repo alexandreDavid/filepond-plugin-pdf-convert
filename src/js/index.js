@@ -16,7 +16,7 @@ const plugin = ({ addFilter, utils }) => {
           resolve(file);
           return;
         }
-        pdfToImage(file, query('GET_PDF_CONVERT_TYPE')).then(function(newFile) {
+        pdfToImage(file, query('GET_PDF_CONVERT_TYPE'),  query('GET_PDF_CONVERT_MARGIN_HEIGHT')).then(function(newFile) {
           resolve(newFile);
         }).catch(() => resolve(file));
       })
@@ -28,6 +28,7 @@ const plugin = ({ addFilter, utils }) => {
     options: {
       // Set type convertor
       pdfConvertType: ['image/png', Type.STRING],
+      pdfConvertMarginHeight: [30, Type.NUMBER]
     },
   };
 };

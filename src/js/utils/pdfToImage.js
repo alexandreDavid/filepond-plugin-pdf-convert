@@ -1,10 +1,9 @@
-export const pdfToImage = (file, type) => {
+export const pdfToImage = (file, type, marginHeight) => {
   const pages = [];
   const heights = [];
   let width = 0;
   let height = 0;
   let currentPage = 1;
-  const marginHeight = 30;
   const scale = 1.5;
 
   function mergePages() {
