@@ -17,6 +17,12 @@ export const pdfToImage = (file, type) => {
     return canvas;
   }
   return new Promise((resolve, reject) => {
+    if (typeof pdfjsLib === 'undefined') {
+      const message = 'The library PDF.js is required to convert PDF in image';
+      console.warn(message);
+      reject(message);
+      return;
+    }
     try {
       const fileReader = new FileReader();
 
