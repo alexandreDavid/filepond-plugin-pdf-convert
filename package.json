@@ -1,6 +1,6 @@
 {
   "name": "filepond-plugin-pdf-convert",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Include PDF file convertor plugin",
   "repository": {
     "type": "git",
