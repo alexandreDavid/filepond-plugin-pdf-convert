@@ -16,13 +16,13 @@ Requirement:
 Install using npm:
 
 ```bash
-npm install alexandreDavid/filepond-plugin-pdf-convert
+npm install filepond-plugin-pdf-convert
 ```
 
 Or install using Yarn:
 
 ```bash
-yarn add alexandreDavid/filepond-plugin-pdf-convert
+yarn add filepond-plugin-pdf-convert
 ```
 Or using a CDN refernce:
 
