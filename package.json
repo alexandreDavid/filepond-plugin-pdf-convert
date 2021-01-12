@@ -24,7 +24,7 @@
     "pdf"
   ],
   "author": "alexandreDavid",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "filepond": ">=1.8.x <5.x"
   },
