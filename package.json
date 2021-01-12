@@ -1,7 +1,11 @@
 {
   "name": "filepond-plugin-pdf-convert",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "description": "Include PDF file convertor plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandreDavid/filepond-plugin-pdf-convert.git"
+  },
   "main": "dist/filepond-plugin-pdf-convert.js",
   "browser": "dist/filepond-plugin-pdf-convert.js",
   "module": "dist/filepond-plugin-image-pdf-convert.esm.js",
@@ -33,5 +37,9 @@
     "rollup-plugin-license": "^2.2.0",
     "rollup-plugin-prettier": "^2.1.0",
     "rollup-plugin-terser": "^7.0.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/alexandreDavid/filepond-plugin-pdf-convert/issues"
+  },
+  "homepage": "https://github.com/alexandreDavid/filepond-plugin-pdf-convert#readme"
 }
