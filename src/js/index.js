@@ -1,5 +1,5 @@
 import { isPdf } from "./utils/isPdf";
-import { pdfToImage } from "./utils/pdfToImage";
+import { pdfToImage } from "./utils/pdfToImage.ts";
 
 const plugin = ({ addFilter, utils }) => {
   // get quick reference to Type utils
